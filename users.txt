@@ -1,0 +1,3 @@
+c1,c1,customer
+s1,s1,seller
+c2,c2,customer
