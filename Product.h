@@ -4,9 +4,9 @@ using namespace std;
 class Product {
 private:
     string name;
-    double price;
-    int stock;
     string limitedFlag;
+    int stock;
+    double price;
 
 public:
     Product(string _name, double _price, int _stock, string _limitedFlag);

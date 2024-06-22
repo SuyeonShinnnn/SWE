@@ -20,6 +20,7 @@ void OrderManager::updateOrderStatus(const string& orderId, const string& newSta
         }
     }
 }
+
 void OrderManager::showPendingOrders() const {
     for (const auto& order : orders) {
         if (order.getStatus() == "¹ß¼ÛÀü") {
@@ -52,11 +53,14 @@ void OrderManager::saveOrders() {
     file.close();
 }
 
-void OrderManager::loadOrders() {
+void OrderManager::loadOrders() 
+{
     ifstream file(orderFile);
     orders.clear();
+
     string line;
-    while (getline(file, line)) {
+    while (getline(file, line)) 
+    {
         stringstream ss(line);
         string orderId, product, customerId, status, date;
         string countStr;
@@ -64,12 +68,14 @@ void OrderManager::loadOrders() {
         getline(ss, orderId, ',');
         getline(ss, product, ',');
         getline(ss, countStr, ',');
+
         int count = stoi(countStr);
+
         getline(ss, customerId, ',');
         getline(ss, status, ',');
         getline(ss, date, ',');
+
         orders.emplace_back(orderId, product, count, customerId, status, date);
     }
-
     file.close();
 }

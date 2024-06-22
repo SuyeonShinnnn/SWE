@@ -1,23 +1,52 @@
 #include "Admin.h"
+#include "ReviewManager.h"
 #include <iostream>
 
 Admin::Admin(string id, string password) : User(id, password) {}
 
 void Admin::showMenu() const
 {
-    cout << "1. ¸®ºä»èÁ¦\n";
+    cout << "==============Admin==============" << endl;
+    cout << "1. ¸®ºä°ü¸®\n";
     cout << "2. ·Î±×¾Æ¿ô\n";
 }
 void Admin::handleMenu(Inventory& inventory)
 {
-    while (true) {
+    system("cls");
+    while (true) 
+    {
         showMenu();
+
+        cout << ">> ";
         int choice;
         cin >> choice;
+
+        //¸®ºä°ü¸®
         if (choice == 1) {
-            // Add review deletion functionality here
+            system("cls");
+            cout << "==============Review==============" << endl;
+
+            ReviewManager reviewManager;
+            reviewManager.showReviews();
+            cout << "==================================" << endl;
+            cout << "==================================" << endl;
+            cout << "»èÁ¦ÇÒ ¸®ºä ¹øÈ£(µÚ·Î°¡±â: 0)" << endl;
+            cout << ">> ";
+
+            int number;
+            cin >> number;
+            
+            system("cls");
+
+            if (number != 0)
+            {
+                reviewManager.deleteReview(number);
+                cout << "**¸®ºä »èÁ¦ ¿Ï·á**" << endl;
+            }
         }
+        //·Î±×¾Æ¿ô
         else if (choice == 2) {
+            system("cls");
             break;
         }
     }

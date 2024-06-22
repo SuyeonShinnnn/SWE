@@ -23,21 +23,21 @@ void ShoppingCart::addItem(const CartItem& item)
 
 bool ShoppingCart::checkout(string customerId) {
     bool success = true;
-    string orderId = to_string(time(0));
+    int id = time(0);
 
     for (auto& item : items) {
         int currentStock = inventory.searchProductStock(item.getProduct());
-
+        string orderId = to_string(id++);
 
         if (currentStock < item.getCount()) {
             cout << "재고가 부족하여 결제에 실패하였습니다. " << item.getProduct() << endl;
             success = false;
         }
-        else {
+        else 
+        {
             orderManager.addOrder(orderId, item.getProduct(), item.getCount(), customerId, "발송전");
             inventory.updateStock(item.getProduct(), currentStock - item.getCount());
         }
-
     }
     if (success) {
         items.clear();
@@ -79,3 +79,17 @@ void ShoppingCart::loadCart() {
     file.close();
 }
 
+int ShoppingCart::getLastLineNumber()
+{
+    ifstream file("orders.txt", ios::in | ios::ate);
+    string line;
+
+    int count = 1;
+    while (getline(file, line))
+    {
+        count++;
+    }
+    file.close();
+
+    return count;
+}

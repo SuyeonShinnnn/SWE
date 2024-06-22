@@ -17,4 +17,5 @@ public:
     void saveCart();
     void loadCart();
     bool checkout(string customerId);
+    int getLastLineNumber();
 };

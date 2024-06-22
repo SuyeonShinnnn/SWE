@@ -10,8 +10,9 @@ private:
 public:
     ReviewManager();
     ~ReviewManager();
-    void addReview(const string& orderId, const string& product, int score, const string& content);
+    void addReview(const string& orderId, const string& product, int score, const string& content, const string& id);
     void showReviews() const;
     void saveReviews();
     void loadReviews();
+    void deleteReview(int number);
 };

@@ -14,7 +14,6 @@ public:
     ShoppingCart& getCart();
     void showMenu() const override;
     void handleMenu(Inventory& inventory) override;
-    void showOrders() const;
     void addToCart(Inventory& inventory);
     void manageReviews();
     void writeReview();

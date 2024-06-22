@@ -18,9 +18,7 @@ public:
     string getCustomerId() const;
     string getStatus() const;
     string getDate() const;
-
     void setStatus(const string& newStatus);
     void showOrder() const;
-
     int getCount() const;
 };

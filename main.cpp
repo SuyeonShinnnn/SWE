@@ -7,12 +7,44 @@
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
+void signIn();
+void signUp();
+
+int main() {
+
+    while (true) {
+
+        cout << "============올림Pick============" << endl;
+        cout << "1. 로그인  2. 회원가입  3. 종료" << endl;
+        cout << ">> ";
+
+        int choice;
+        cin >> choice;
+
+        system("cls");
+
+        //로그인
+        if (choice == 1) {
+            signIn();
+        }
+        //회원가입
+        else if (choice == 2) {
+
+            signUp();
+        }
+        //종료
+        else if (choice == 3) {
+            break;
+        }
+    }
+
+    return 0;
+}
 void signIn()
 {
     Inventory inventory;
     UserManager userManager(inventory);
 
-    system("cls");
     cout << "===========로그인===========" << endl;
 
     string id, password;
@@ -28,7 +60,7 @@ void signIn()
     }
     else {
         system("cls");
-        cout << "로그인 실패\n";
+        cout << "**로그인 실패**\n";
     }
 }
 void signUp()
@@ -36,58 +68,37 @@ void signUp()
     Inventory inventory;
     UserManager userManager(inventory);
 
-    system("cls");
-    cout << "===========회원가입===========" << endl;
+    string id, password;
+    int role;
 
-    string id, password, role;
+    cout << "================회원가입================" << endl;
+    cout << "권한 (1. customer | 2. seller | 3. admin): ";
+    cin >> role;
+    
     cout << "아이디: ";
     cin >> id;
 
+  
     //아이디 중복 체크
     if (userManager.isUserIdTaken(id)) {
         system("cls");
         cout << "**이미 존재하는 아이디입니다**\n";
+        signUp();
     }
-    cout << "비밀번호: ";
-    cin >> password;
-    cout << "권한(customer/admin/seller): ";
-    cin >> role;
+    else
+    {
+        cout << "비밀번호: ";
+        cin >> password;
 
-    if (role == "customer") {
-        userManager.addUser(new Customer(id, password, inventory));
-    }
-    else if (role == "admin") {
-        userManager.addUser(new Admin(id, password));
-    }
-    else if (role == "seller") {
-        userManager.addUser(new Seller(id, password, inventory));
-    }
-}
-int main() {
-
-    Inventory inventory;
-    UserManager userManager(inventory);
-
-    while (true) {
-
+        if (role == 1) {
+            userManager.addUser(new Customer(id, password, inventory));
+        }
+        else if (role == 2) {
+            userManager.addUser(new Seller(id, password, inventory));
+        }
+        else if (role == 3) {
+            userManager.addUser(new Admin(id, password));
+        }
         system("cls");
-        cout << "============올림Pick============" << endl;
-        cout << "1. 로그인  2. 회원가입  3. 종료" << endl;
-        cout << ">> ";
-
-        int choice;
-        cin >> choice;
-
-        if (choice == 1) {
-            signIn();
-        }
-        else if (choice == 2) {
-            signUp();
-        }
-        else if (choice == 3) {
-            break;
-        }
     }
-
-    return 0;
 }

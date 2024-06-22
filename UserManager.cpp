@@ -38,9 +38,11 @@ bool UserManager::isUserIdTaken(const string& id) {
     return false;
 }
 void UserManager::saveUsers() {
+
     ofstream file(userFile);
+
     for (const auto user : users) {
-        string role = "customer"; // Default role
+        string role = "customer";
         if (dynamic_cast<Admin*>(user)) {
             role = "admin";
         }
